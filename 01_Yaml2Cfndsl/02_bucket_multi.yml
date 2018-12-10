@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: Create multiple S3 Buckets from a specified parameter
+
+Parameters:
+  S3BucketName:
+    Description: The name of the S3 bucket to create
+    Type: String
+
+Resources:
+  S3Bucket0:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join
+        - ''
+        - - !Ref S3BucketName
+          - '0'
+  S3Bucket1:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join
+        - ''
+        - - !Ref S3BucketName
+          - '1'
+  S3Bucket2:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join
+        - ''
+        - - !Ref S3BucketName
+          - '2'
+
+Outputs:
+  S3Bucket0Arn:
+    Description: S3 Bucket0 ARN
+    Value: !GetAtt S3Bucket0.Arn
+  S3Bucket1Arn:
+    Description: S3 Bucket1 ARN
+    Value: !GetAtt S3Bucket1.Arn
+  S3Bucket2Arn:
+    Description: S3 Bucket2 ARN
+    Value: !GetAtt S3Bucket2.Arn
